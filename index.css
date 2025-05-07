@@ -1,0 +1,213 @@
+html, body {
+    background-color: rgb(18, 18, 18);
+    height: 100%;
+    width: 100%;
+    font-family: "Playfair Display", serif;
+    margin-top: 0px;
+
+}
+@keyframes expandShrink {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.1);}
+    100% {transform: scale(1);} 
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+#container {
+    display: flex;
+    flex-direction: column;
+    
+}
+.buttons {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 58px;
+    width: 43.6px;
+    border-radius: 4px;
+    font-size: 1.25em;
+    font-weight: bold;
+    background-color:#818384;
+    color: aliceblue;
+    border: none;
+    margin: 0.8%;
+    padding: 18px;
+    display: flex;
+    justify-content: center;
+}
+.section-divs {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 98%;
+}
+#wordButton {
+    font-size: 1em;
+    width: fit-content;
+}
+#keyboard {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 98%;
+}
+.buttons:hover {
+    background-color: aliceblue;
+    color: #818384;
+}
+.textbox-divs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 2em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    height: 58.5px;
+    width: 58px;
+    border: 2.2px solid rgb(64, 64, 64);
+    margin: 0.15%;
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(64, 64, 64);
+    height: 6%;
+    width: 100%;
+}
+.textbox-divs-has-letter {
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 2em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    height: 58.5px;
+    width: 58px;
+    border: 2.2px solid rgb(64, 64, 64);
+    margin: 0.15%;
+    animation: expandShrink 0.3s ease-in-out;
+}
+#hints {
+    margin-right: 3%;
+    margin-left: -2%;
+    
+}
+#how-to-play {
+
+}
+svg {
+    color: aliceblue;
+}
+#finished-div {
+    animation: fadeIn 0.2s ease-in;
+    width: 40%;
+    height: 25%;
+    background-color: rgb(18, 18, 18);
+    position: absolute;
+    left: 31%;
+    top: 10%;
+    color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    filter: initial;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+}
+h2 {
+    height: fit-content;
+    text-align: center;
+    width: 60%;
+}
+#div1 {
+    margin: 4%;
+    margin-bottom: -2%;
+    display:flex;
+    flex-direction: row;
+    height: fit-content;
+    color: white;
+    margin-left: 90%;
+}
+#validWord {
+    position: absolute;
+    left: 46.5%;
+    height: 4%;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    top: 6%;
+    border-radius: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    letter-spacing: -1px;
+    font-size: 14px;
+    padding: 6px;
+    animation: shake 0.5s ease-in-out infinite;
+}
+p {
+    display:flex;
+    align-items:center;
+}
+#hint {
+    position: absolute;
+    animation: fadeIn 0.2s ease-in;
+    width: 40%;
+    height: 45%;
+    
+    background-color: rgb(16,16,16);
+    left: 31%;
+    top: 10%;
+    color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    filter: initial;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+}
+h2 {
+    height: fit-content;
+    text-align: center;
+    width: 100%;
+    margin: 5%;
+}
+#selectedWord {
+    position: absolute;
+    left: 46.5%;
+    height: 4%;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    top: 6%;
+    border-radius: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    letter-spacing: -1px;
+    font-size: 14px;
+    padding: 6px;
+}
