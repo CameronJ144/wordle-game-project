@@ -7,7 +7,7 @@ let attempts = 0;
 let done = false;
 let pause = false;
 let active = false;
-
+let finishedScreen = false;
 //words needed for this game 
 let keyboardLetter = ["Q","W","E","R","T","Y","U","I","O","P"
 ,"A","S","D","F","G","H","J","K","L","ENTER","Z","X","C","V","B","N","M","DELETE"]; //alphabet for buttons
@@ -23,10 +23,6 @@ let container = document.getElementById("container");
 let randomNum = Math.floor(Math.random() * 49); //randomizer to pick a word
 let selectedWord = maybeWords[randomNum]; //selected word for the game
 console.log(selectedWord);
-console.log(randomNum);
-
-
-
 
 // This section is for everything needed to create textboxs 
 
@@ -138,8 +134,6 @@ function addLetter(){
                                         selectedWordDict[selectedWord[i]] += 1;
                                         wordDict[word[i]] += 1;
                                     }
-                                    console.log(selectedWordDict);
-                                    console.log(wordDict);
                                     for(let i=word.length-1;i>=0;i--){
                                         if(word[i] != selectedWord[i]){
                                             if(selectedWord.includes(word[i])){
@@ -164,81 +158,77 @@ function addLetter(){
                                             section.style.border = "2.2px solid #538d4e"
                                             correct += 1;
                                             if(correct == 5){
-                                                let timer = setInterval(function(){
-                                                    let div = document.createElement("div");
-                                                    div.id = "finished-div";
-                                                    body.insertBefore(div,document.getElementsByTagName("nav")[0]);
-                                                    h2 = document.createElement("h2");
-                                                    h2.innerHTML = "Thanks for Playing!\n \tYou have finished!";
-                                                    let div1 = document.createElement("div");
-                                                    div1.id = "div1"
-                                                    div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
-                                                    div1.addEventListener("click",function(){
-                                                        document.getElementById("finished-div").remove();
-                                                        body.style.backgroundColor = "rgb(16,16,16)";
-                                                    })
-                                                    div.appendChild(div1);
-                                                    div.appendChild(h2);
-                                                    body.style.backgroundColor = "black";
-                                                    clearInterval(timer);
-                                                },"1000");
+                                                if(group != 6){
+                                                    let timer = setInterval(function(){
+                                                        let div = document.createElement("div");
+                                                        div.id = "finished-div";
+                                                        body.insertBefore(div,document.getElementsByTagName("nav")[0]);
+                                                        h2 = document.createElement("h2");
+                                                        h2.innerHTML = "Thanks for Playing!\n \tYou have finished!";
+                                                        let div1 = document.createElement("div");
+                                                        div1.id = "div1"
+                                                        div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
+                                                        div1.addEventListener("click",function(){
+                                                            document.getElementById("finished-div").remove();
+                                                            body.style.backgroundColor = "rgb(16,16,16)";
+                                                        })
+                                                        div.appendChild(div1);
+                                                        div.appendChild(h2);
+                                                        body.style.backgroundColor = "black";
+                                                        clearInterval(timer);
+                                                    },"1000");
+                                                    let div2 = document.createElement("div");
+                                                    div2.id = "selectedWord"
+                                                    let p = document.createElement("p");
+                                                    p.innerHTML = selectedWord.toUpperCase();
+                                                    div2.appendChild(p);
+                                                    body.insertBefore(div2,document.getElementsByTagName("nav")[0]);
+                                                    let timer1 = setInterval(function(){
+                                                        //document.getElementById("selectedWord").remove();
+                                                        clearInterval(timer1)
+                                                    },"2000")
+                                                }
                                             }
                                             finished = true;
+                                            finishedScreen = true;
                                         }
                                     }
                                 group += 1;
                                 if(group == 6){
-                                    finished = true;
-                                    let timer = setInterval(function(){
-                                        let div = document.createElement("div");
-                                        div.id = "finished-div";
-                                        body.insertBefore(div,document.getElementsByTagName("nav")[0]);
-                                        h2 = document.createElement("h2");
-                                        h2.innerHTML = "Thanks for Playing!\n \tYou have finished!";
-                                        let div1 = document.createElement("div");
-                                        div1.id = "div1"
-                                        div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
-                                        div1.addEventListener("click",function(){
-                                            document.getElementById("finished-div").remove();
-                                            body.style.backgroundColor = "rgb(16,16,16)";
-                                        })
-                                        div.appendChild(div1);
-                                        div.appendChild(h2);
-                                        body.style.backgroundColor = "black";
-                                        clearInterval(timer);
-                                    },"1000");
-                                    let div2 = document.createElement("div");
-                                    div2.id = "selectedWord"
-                                    let p = document.createElement("p");
-                                    p.innerHTML = selectedWord.toUpperCase();
-                                    div2.appendChild(p);
-                                    body.insertBefore(div2,document.getElementsByTagName("nav")[0]);
-                                    let timer1 = setInterval(function(){
-                                        document.getElementById("selectedWord").remove();
-                                        clearInterval(timer1)
-                                    },"2000")
-                                    let timer2 = setInterval(function(){
-                                        let div = document.createElement("div");
-                                        div.id = "finished-div";
-                                        body.insertBefore(div,document.getElementsByTagName("nav")[0]);
-                                        h2 = document.createElement("h2");
-                                        h2.innerHTML = "Thanks for Playing!\n \tYou have finished!";
-                                        let div1 = document.createElement("div");
-                                        div1.id = "div1"
-                                        div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
-                                        div1.addEventListener("click",function(){
-                                            document.getElementById("finished-div").remove();
-                                            body.style.backgroundColor = "rgb(16,16,16)";
-                                        })
-                                        div.appendChild(div1);
-                                        div.appendChild(h2);
-                                        body.style.backgroundColor = "black";
-                                        clearInterval(timer2);
-                                    },"3000");
+                                    if(finishedScreen != true){
+                                        finished = true;
+                                        let timer = setInterval(function(){
+                                            let div = document.createElement("div");
+                                            div.id = "finished-div";
+                                            body.insertBefore(div,document.getElementsByTagName("nav")[0]);
+                                            h2 = document.createElement("h2");
+                                            h2.innerHTML = "Thanks for Playing!\n \tYou have finished!";
+                                            let div1 = document.createElement("div");
+                                            div1.id = "div1"
+                                            div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
+                                            div1.addEventListener("click",function(){
+                                                document.getElementById("finished-div").remove();
+                                                body.style.backgroundColor = "rgb(16,16,16)";
+                                            })
+                                            div.appendChild(div1);
+                                            div.appendChild(h2);
+                                            body.style.backgroundColor = "black";
+                                            clearInterval(timer);
+                                        },"1000");
+                                        let div2 = document.createElement("div");
+                                        div2.id = "selectedWord"
+                                        let p = document.createElement("p");
+                                        p.innerHTML = selectedWord.toUpperCase();
+                                        div2.appendChild(p);
+                                        body.insertBefore(div2,document.getElementsByTagName("nav")[0]);
+                                        let timer1 = setInterval(function(){
+                                            //document.getElementById("selectedWord").remove();
+                                            clearInterval(timer1)
+                                        },"2000")
+                                    }
                                 }
                             }
                             if(validWord == false){
-                                console.log("Enter a Valid Word");
                                 let div = document.createElement("div");
                                 div.id = "validWord"
                                 let p = document.createElement("p");
@@ -331,8 +321,6 @@ function keyBoard(e){
                                         selectedWordDict[selectedWord[i]] += 1;
                                         wordDict[word[i]] += 1;
                                     }
-                                    console.log(selectedWordDict);
-                                    console.log(wordDict);
                                     for(let i=word.length-1;i>=0;i--){
                                         if(word[i] != selectedWord[i]){
                                             if(selectedWord.includes(word[i])){
@@ -357,79 +345,77 @@ function keyBoard(e){
                                             section.style.border = "2.2px solid #538d4e"
                                             correct += 1;
                                             if(correct == 5){
-                                                let timer = setInterval(function(){
-                                                    let div = document.createElement("div");
-                                                    div.id = "finished-div";
-                                                    body.insertBefore(div,document.getElementsByTagName("nav")[0]);
-                                                    h2 = document.createElement("h2");
-                                                    h2.innerHTML = "Thanks for Playing!\n \tYou have finished!";
-                                                    let div1 = document.createElement("div");
-                                                    div1.id = "div1"
-                                                    div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
-                                                    div1.addEventListener("click",function(){
-                                                        document.getElementById("finished-div").remove();
-                                                        body.style.backgroundColor = "rgb(16,16,16)";
-                                                    })
-                                                    div.appendChild(div1);
-                                                    div.appendChild(h2);
-                                                    body.style.backgroundColor = "black";
-                                                    clearInterval(timer);
-                                                },"1000");
-                                                finished = true;
+                                                if(group == 6){
+                                                    
+                                                }else{
+                                                    let timer = setInterval(function(){
+                                                        let div = document.createElement("div");
+                                                        div.id = "finished-div";
+                                                        body.insertBefore(div,document.getElementsByTagName("nav")[0]);
+                                                        h2 = document.createElement("h2");
+                                                        h2.innerHTML = "Thanks for Playing!\n \tYou have finished!";
+                                                        let div1 = document.createElement("div");
+                                                        div1.id = "div1"
+                                                        div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
+                                                        div1.addEventListener("click",function(){
+                                                            document.getElementById("finished-div").remove();
+                                                            body.style.backgroundColor = "rgb(16,16,16)";
+                                                        })
+                                                        div.appendChild(div1);
+                                                        div.appendChild(h2);
+                                                        body.style.backgroundColor = "black";
+                                                        clearInterval(timer);
+                                                    },"1000");
+                                                    finished = true;
+                                                    finishedScreen = true;
+                                                    let div2 = document.createElement("div");
+                                                    div2.id = "selectedWord"
+                                                    let p = document.createElement("p");
+                                                    p.innerHTML = selectedWord.toUpperCase();
+                                                    div2.appendChild(p);
+                                                    body.insertBefore(div2,document.getElementsByTagName("nav")[0]);
+                                                    let timer1 = setInterval(function(){
+                                                        //document.getElementById("selectedWord").remove();
+                                                        clearInterval(timer1)
+                                                    },"2000")
+                                                }
                                             }
                                         }
                                     }
                                     group += 1;
                                     if(group == 6){
-                                        finished = true;
-                                        let timer = setInterval(function(){
-                                            let div = document.createElement("div");
-                                            div.id = "finished-div";
-                                            body.insertBefore(div,document.getElementsByTagName("nav")[0]);
-                                            h2 = document.createElement("h2");
-                                            h2.innerHTML = "Thanks for Playing!\n \tYou have finished!";
-                                            let div1 = document.createElement("div");
-                                            div1.id = "div1"
-                                            div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
-                                            div1.addEventListener("click",function(){
-                                                document.getElementById("finished-div").remove();
-                                                body.style.backgroundColor = "rgb(16,16,16)";
-                                            })
-                                            div.appendChild(div1);
-                                            div.appendChild(h2);
-                                            body.style.backgroundColor = "black";
-                                            clearInterval(timer);
-                                        },"1000");
-                                        finished = true;
-                                        let div2 = document.createElement("div");
-                                        div2.id = "selectedWord"
-                                        let p = document.createElement("p");
-                                        p.innerHTML = selectedWord.toUpperCase();
-                                        div2.appendChild(p);
-                                        body.insertBefore(div2,document.getElementsByTagName("nav")[0]);
-                                        let timer1 = setInterval(function(){
-                                            //document.getElementById("selectedWord").remove();
-                                            clearInterval(timer1)
-                                        },"2000")
-                                        console.log("Enter a Valid Word");
-                                        let timer2 = setInterval(function(){
-                                            let div = document.createElement("div");
-                                            div.id = "finished-div";
-                                            body.insertBefore(div,document.getElementsByTagName("nav")[0]);
-                                            h2 = document.createElement("h2");
-                                            h2.innerHTML = "Thanks for Playing!\n \tYou have finished!";
-                                            let div1 = document.createElement("div");
-                                            div1.id = "div1"
-                                            div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
-                                            div1.addEventListener("click",function(){
-                                                document.getElementById("finished-div").remove();
-                                                body.style.backgroundColor = "rgb(16,16,16)";
-                                            })
-                                            div.appendChild(div1);
-                                            div.appendChild(h2);
-                                            body.style.backgroundColor = "black";
-                                            clearInterval(timer2);
-                                        },"3000");
+                                        if(finishedScreen != true){
+                                            finished = true;
+                                            let timer = setInterval(function(){
+                                                let div = document.createElement("div");
+                                                div.id = "finished-div";
+                                                body.insertBefore(div,document.getElementsByTagName("nav")[0]);
+                                                h2 = document.createElement("h2");
+                                                h2.innerHTML = "Thanks for Playing!\n \tYou have finished!";
+                                                let div1 = document.createElement("div");
+                                                div1.id = "div1"
+                                                div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
+                                                div1.addEventListener("click",function(){
+                                                    document.getElementById("finished-div").remove();
+                                                    body.style.backgroundColor = "rgb(16,16,16)";
+                                                })
+                                                div.appendChild(div1);
+                                                div.appendChild(h2);
+                                                body.style.backgroundColor = "black";
+                                                clearInterval(timer);
+                                            },"1000");
+                                            finished = true;
+                                            let div2 = document.createElement("div");
+                                            div2.id = "selectedWord"
+                                            let p = document.createElement("p");
+                                            p.innerHTML = selectedWord.toUpperCase();
+                                            div2.appendChild(p);
+                                            body.insertBefore(div2,document.getElementsByTagName("nav")[0]);
+                                            let timer1 = setInterval(function(){
+                                                //document.getElementById("selectedWord").remove();
+                                                clearInterval(timer1)
+                                            },"2000")
+                                        }
                                     }
                                 }
                                 if(validWord == false){
@@ -492,7 +478,7 @@ function hintsPopUp(){
         let div1 = document.createElement("div");
         
         for(let i=0;i<5;i++){
-            if(selectedWord[i] == "a" || selectedWord[i] == "e" || selectedWord[i] == "i" || selectedWord[i] == "o" || selectedWord[i] == "u"){
+            if(selectedWord[i] == "a" || selectedWord[i] == "e" || selectedWord[i] == "i" || selectedWord[i] == "o" || selectedWord[i] == "u" || selectedWord[i] == "A" || selectedWord[i] == "E" || selectedWord[i] == "I" || selectedWord[i] == "O" || selectedWord[i] == "U"){
                 vowels += 1
             }else{
                 consonant += 1
@@ -532,22 +518,211 @@ function hintsPopUp(){
     }
 }
 function htpPopUp(){
-    console.log("how-to-play");
-        pause = true
-        let div = document.createElement("div");
-        let div1 = document.createElement("div");
-        div.id = "hint"
-        body.insertBefore(div,document.getElementsByTagName("nav")[0]);
-        body.style.backgroundColor = "black";
-        div1.id = "div1"
-        div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
-        div1.addEventListener("click",function(){
-            document.getElementById("hint").remove();
-            body.style.backgroundColor = "rgb(16,16,16)";
-            pause = false;
-            active = false;
-        });
-        div.appendChild(div1);
-        pause = true;
-        active = true;
+        if(active == true){
+            
+        }else{
+            let div = document.createElement("div");
+            let div1 = document.createElement("div");
+            let div2 = document.createElement("div");
+            let title = document.createElement("h2");
+            let textDiv = document.createElement("div");
+            let exampleText = document.createElement("h2");
+            let exampleDiv = document.createElement("div");
+            exampleText.innerHTML = "Examples"
+            exampleText.style.marginLeft = "0%";
+            exampleDiv.className = "htpstyle";
+            exampleDiv.appendChild(exampleText);
+            textDiv.className = "htpstyle";
+            for(let i=0;i<3;i++){
+                let p = document.createElement("p");
+                switch(i){
+                    case 0:
+                        p.innerHTML = "Guess the word in 6 tries.";
+                        p.style.marginTop = "0%";
+                        textDiv.appendChild(p);
+                        break
+                    case 1:
+                        p.innerHTML = "Each guess must be a valid 5 real letter word found on the dictionary. Hit the enter button to submit.";
+                        textDiv.appendChild(p);
+                        break
+                    case 2:
+                        p.innerHTML = "After each guess, the color of the tiles will change to show how close your guess was to the word.";
+                        textDiv.appendChild(p);
+                        break
+                }
+            }
+            title.innerHTML = "How To Play";
+            
+            title.style.letterSpacing = "-1.5px";
+            title.style.marginLeft = "0px";
+            //title.style.
+            div2.className = "htpstyle"
+            div.id = "how-to-plays";
+            body.insertBefore(div,document.getElementsByTagName("nav")[0]);
+            body.style.backgroundColor = "black";
+            div1.id = "div1"
+            div1.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"> <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>'
+            div1.addEventListener("click",function(){
+                document.getElementById("how-to-plays").remove();
+                body.style.backgroundColor = "rgb(16,16,16)";
+                pause = false;
+                active = false;
+            });
+            let ewDivContainer1 = document.createElement("div");
+            ewDivContainer1.className = "ewDivContainer";
+            let ewDivContainer2 = document.createElement("div");
+            ewDivContainer2.className = "ewDivContainer";
+            let ewDivContainer3 = document.createElement("div");
+            ewDivContainer3.className = "ewDivContainer";
+            for(let i=0;i<3;i++){
+                switch(i){
+                    case 0:
+                        for(let j=0;j<5;j++){
+                            switch(j){
+                                case 0:
+                                    let ewDiv0 = document.createElement("div");
+                                    ewDiv0.className = "ewDiv";
+                                    ewDiv0.style.backgroundColor = "#538d4e";
+                                    ewDiv0.style.border = "2.2px solid #538d4e";
+                                    ewDiv0.innerHTML = "W";
+                                    ewDivContainer1.appendChild(ewDiv0);
+                                    break
+                                case 1:
+                                    let ewDiv1 = document.createElement("div");
+                                    ewDiv1.className = "ewDiv";
+                                    ewDiv1.innerHTML = "O";
+                                    ewDivContainer1.appendChild(ewDiv1);
+                                    break;
+                                case 2:
+                                    let ewDiv2 = document.createElement("div");
+                                    ewDiv2.className = "ewDiv";
+                                    ewDiv2.innerHTML = "R";
+                                    ewDivContainer1.appendChild(ewDiv2);
+                                    break;
+                                case 3:
+                                    let ewDiv3 = document.createElement("div");
+                                    ewDiv3.className = "ewDiv";
+                                    ewDiv3.innerHTML = "D";
+                                    ewDivContainer1.appendChild(ewDiv3);
+                                    break;
+                                case 4:
+                                    let ewDiv4 = document.createElement("div");
+                                    ewDiv4.className = "ewDiv";
+                                    ewDiv4.innerHTML = "S";
+                                    ewDivContainer1.appendChild(ewDiv4);
+                                    break;
+                            }
+                        }
+                        break;
+                    case 1:
+                        for(let j=0;j<5;j++){
+                            switch(j){
+                                case 0:
+                                    let ewDiv5 = document.createElement("div");
+                                    ewDiv5.className = "ewDiv";
+                                    ewDiv5.innerHTML = "V";
+                                    ewDivContainer2.appendChild(ewDiv5);
+                                    break
+                                case 1:
+                                    let ewDiv6 = document.createElement("div");
+                                    ewDiv6.className = "ewDiv";
+                                    ewDiv6.style.backgroundColor = "#b59f3b";
+                                    ewDiv6.style.border = "2.2px solid #b59f3b";
+                                    ewDiv6.innerHTML = "I";
+                                    ewDivContainer2.appendChild(ewDiv6);
+                                    break;
+                                case 2:
+                                    let ewDiv7 = document.createElement("div");
+                                    ewDiv7.className = "ewDiv";
+                                    ewDiv7.innerHTML = "V";
+                                    ewDivContainer2.appendChild(ewDiv7);
+                                    break;
+                                case 3:
+                                    let ewDiv8 = document.createElement("div");
+                                    ewDiv8.className = "ewDiv";
+                                    ewDiv8.innerHTML = "I";
+                                    ewDivContainer2.appendChild(ewDiv8);
+                                    break;
+                                case 4:
+                                    let ewDiv9 = document.createElement("div");
+                                    ewDiv9.className = "ewDiv";
+                                    ewDiv9.innerHTML = "D";
+                                    ewDivContainer2.appendChild(ewDiv9);
+                                    break;
+                            }
+                        }
+                        break;
+                    case 2:
+                        for(let j=0;j<5;j++){
+                            switch(j){
+                                case 0:
+                                    let ewDiv10 = document.createElement("div");
+                                    ewDiv10.className = "ewDiv";
+                                    ewDiv10.innerHTML = "S";
+                                    ewDivContainer3.appendChild(ewDiv10);
+                                    break
+                                case 1:
+                                    let ewDiv11 = document.createElement("div");
+                                    ewDiv11.className = "ewDiv";
+                                    ewDiv11.innerHTML = "O";
+                                    ewDivContainer3.appendChild(ewDiv11);
+                                    break;
+                                case 2:
+                                    let ewDiv12 = document.createElement("div");
+                                    ewDiv12.className = "ewDiv";
+                                    ewDiv12.innerHTML = "L";
+                                    ewDivContainer3.appendChild(ewDiv12);
+                                    break;
+                                case 3:
+                                    let ewDiv13 = document.createElement("div");
+                                    ewDiv13.className = "ewDiv";
+                                    ewDiv13.style.backgroundColor = "rgb(64,64,64)";
+                                    ewDiv13.style.border = "2.2px solid rgb(64,64,64)";
+                                    ewDiv13.innerHTML = "U";
+                                    ewDivContainer3.appendChild(ewDiv13);
+                                    break;
+                                case 4:
+                                    let ewDiv14 = document.createElement("div");
+                                    ewDiv14.className = "ewDiv";
+                                    ewDiv14.innerHTML = "S";
+                                    ewDivContainer3.appendChild(ewDiv14);
+                                    break;
+                            }
+                        }
+                        break;
+                }
+            }
+            let ewText1 = document.createElement("div");
+            ewText1.className = "htpstyle";
+            let ewText2 = document.createElement("div");
+            ewText2.className = "htpstyle";
+            let ewText3 = document.createElement("div");
+            ewText3.className = "htpstyle";
+            let p1 = document.createElement("p");
+            p1.innerHTML = "Green means correct letter & position."
+            p1.className = "ewP"
+            ewText1.appendChild(p1);
+            let p2 = document.createElement("p");
+            p2.innerHTML = "Yellow means correct letter wrong position."
+            p2.className = "ewP"
+            ewText2.appendChild(p2);
+            let p3 = document.createElement("p");
+            p3.innerHTML = "Grey means letter not involved."
+            p3.className = "ewP"
+            ewText3.appendChild(p3);
+            div.appendChild(div1);
+            div2.appendChild(title);
+            div.appendChild(div2);
+            div.appendChild(textDiv)
+            div.appendChild(exampleDiv)
+            div.appendChild(ewDivContainer1);
+            div.appendChild(ewText1);
+            div.appendChild(ewDivContainer2);
+            div.appendChild(ewText2);
+            div.appendChild(ewDivContainer3);
+            div.appendChild(ewText3);
+            pause = true;
+            active = true;
+        }
 }
+htpPopUp();
