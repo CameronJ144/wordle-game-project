@@ -115,9 +115,6 @@ nav {
     margin-left: -2%;
     
 }
-#how-to-play {
-
-}
 svg {
     color: aliceblue;
 }
@@ -177,7 +174,6 @@ p {
     animation: fadeIn 0.2s ease-in;
     width: 40%;
     height: 45%;
-    
     background-color: rgb(16,16,16);
     left: 31%;
     top: 10%;
@@ -197,7 +193,7 @@ h2 {
 }
 #selectedWord {
     position: absolute;
-    left: 46.5%;
+    left: 47.8%;
     height: 4%;
     background-color: white;
     color: black;
@@ -210,4 +206,50 @@ h2 {
     letter-spacing: -1px;
     font-size: 14px;
     padding: 6px;
+}
+#how-to-plays {
+    position: fixed;
+    animation: fadeIn 0.2s ease-in;
+    width: 40%;
+    height: 65%;
+    background-color: rgb(16,16,16);
+    left: 31%;
+    top: 10%;
+    color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    filter: initial;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 24px;
+}
+.htpstyle {
+    margin-left: 8%;
+    font-size: 16px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: left;
+}
+.ewDiv {
+    font-family:inherit;
+    height: 40px;
+    width: 40px;
+    border: 2.2px solid rgb(64, 64, 64);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 150%;
+    margin: 1%;
+}
+.ewDivContainer {
+    display: flex;
+    flex-direction: row;
+    margin-left: 8%;
+    font-size: 16px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: left;
+}
+.ewP {
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
